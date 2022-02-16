@@ -40,7 +40,6 @@ use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
 use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 -- Themes
-use("mjlbach/onedark.nvim") -- Theme inspired by Atom
 use("ishan9299/nvim-solarized-lua")
 
 use({ "nvim-lualine/lualine.nvim", config = get_config("lualine") }) -- Fancier statusline
@@ -57,3 +56,4 @@ use("hrsh7th/nvim-cmp") -- Autocompletion plugin
 use("hrsh7th/cmp-nvim-lsp")
 use("saadparwaiz1/cmp_luasnip")
 use("L3MON4D3/LuaSnip") -- Snippets plugin
+use({ "ray-x/go.nvim", config = get_config("go") }) -- Golang support
