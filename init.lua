@@ -30,16 +30,6 @@ vim.cmd([[colorscheme onedark]])
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
---Set statusbar
-require("lualine").setup({
-	options = {
-		icons_enabled = false,
-		theme = "onedark",
-		component_separators = "|",
-		section_separators = "",
-	},
-})
-
 --Enable Comment.nvim
 require("Comment").setup()
 
