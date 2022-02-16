@@ -4,8 +4,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
 end
 
--- FIXME: Expand this to be any file in the project
 -- Run :PackerCompile if this file is modified
+-- FIXME: Expand this to be any file in the project
 vim.cmd([[
   augroup Packer
     autocmd!
@@ -38,7 +38,11 @@ use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
 -- UI to select things (files, grep results, open buffers...)
 use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
 use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+
+-- Themes
 use("mjlbach/onedark.nvim") -- Theme inspired by Atom
+use("ishan9299/nvim-solarized-lua")
+
 use({ "nvim-lualine/lualine.nvim", config = get_config("lualine") }) -- Fancier statusline
 -- Add indentation guides even on blank lines
 use("lukas-reineke/indent-blankline.nvim")
