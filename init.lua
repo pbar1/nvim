@@ -84,6 +84,9 @@ vim.cmd([[colorscheme solarized]])
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
+-- Share clipboard with system
+vim.opt.clipboard:append("unnamedplus")
+
 --Enable Comment.nvim
 require("Comment").setup()
 
