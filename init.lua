@@ -1,4 +1,57 @@
-require("plugins")
+-------------------------------------------------------------------------------
+-- Packer config
+-------------------------------------------------------------------------------
+
+-- Install Packer if not already installed
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	vim.fn.execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+end
+
+-- Automatically run :PackerCompile if this file is modified
+vim.cmd([[
+  augroup Packer
+    autocmd!
+    autocmd BufWritePost init.lua PackerCompile
+  augroup end
+]])
+
+-- Initialize Packer
+local packer = require("packer")
+packer.init({
+	enable = true, -- Enable profiling with :PackerCompile profile=true
+	threshold = 0, -- Amount in ms that a plugin load time must exceed to be included in profile
+})
+local use = packer.use
+packer.reset()
+
+-- Convenience function that returns a require statement for loading Packer
+-- plugin config. Meant to be passed to the `config` parameter of Packer `use`.
+local function plugin_config(name)
+	return string.format("require('plugin_config.%s')", name)
+end
+
+-- Plugins
+use("wbthomason/packer.nvim")
+use("numToStr/Comment.nvim")
+use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
+use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+use("ishan9299/nvim-solarized-lua")
+use({ "nvim-lualine/lualine.nvim", config = plugin_config("lualine") })
+use("lukas-reineke/indent-blankline.nvim")
+use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+use("nvim-treesitter/nvim-treesitter")
+use("nvim-treesitter/nvim-treesitter-textobjects")
+use("neovim/nvim-lspconfig")
+use("hrsh7th/nvim-cmp")
+use("hrsh7th/cmp-nvim-lsp")
+use("saadparwaiz1/cmp_luasnip")
+use("L3MON4D3/LuaSnip")
+use("ray-x/go.nvim")
+
+-------------------------------------------------------------------------------
+-- Vim options
+-------------------------------------------------------------------------------
 
 --Set highlight on search
 vim.o.hlsearch = false
@@ -25,7 +78,7 @@ vim.wo.signcolumn = "yes"
 
 --Set colorscheme
 vim.o.termguicolors = true
-vim.opt.background = "light"
+vim.opt.background = "dark"
 vim.cmd([[colorscheme solarized]])
 
 -- Set completeopt to have a better completion experience
@@ -322,4 +375,10 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 })
--- vim: ts=2 sts=2 sw=2 et
+
+-------------------------------------------------------------------------------
+-- Programming language support
+-------------------------------------------------------------------------------
+
+-- Golang
+require("go").setup()
